@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Entries</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 40px auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px #0001;
+        padding: 32px;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 16px;
+        margin-bottom: 24px;
+      }
+      h2 {
+        color: #1976d2;
+        margin: 0;
+      }
+      .nav-links {
+        display: flex;
+        gap: 16px;
+      }
+      .nav-links a {
+        color: #1976d2;
+        text-decoration: none;
+        padding: 8px 16px;
+        border: 1px solid #1976d2;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      .nav-links a:hover {
+        background: #1976d2;
+        color: white;
+      }
+      .entry-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 16px;
+        background: #fafafa;
+      }
+      .entry-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .entry-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin: 0;
+      }
+      .status {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      .status.pending {
+        background: #fff3cd;
+        color: #856404;
+      }
+      .status.accepted {
+        background: #d4edda;
+        color: #155724;
+      }
+      .status.rejected {
+        background: #f8d7da;
+        color: #721c24;
+      }
+      .entry-meta {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 12px;
+      }
+      .entry-description {
+        margin-bottom: 8px;
+      }
+      .entry-value {
+        background: #f8f9fa;
+        padding: 12px;
+        border-radius: 4px;
+        border-left: 4px solid #1976d2;
+        margin-bottom: 8px;
+      }
+      .admin-notes {
+        background: #fff3cd;
+        padding: 12px;
+        border-radius: 4px;
+        border-left: 4px solid #ffc107;
+        margin-top: 12px;
+      }
+      .no-entries {
+        text-align: center;
+        color: #666;
+        padding: 40px;
+      }
+      .btn {
+        display: inline-block;
+        background: #1976d2;
+        color: white;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-bottom: 20px;
+      }
+      .btn:hover {
+        background: #125ea2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>My Data Entries</h2>
+        <div class="nav-links">
+          <a href="/employees/details/">Dashboard</a>
+          <a href="/employees/data-entry/">New Entry</a>
+          <a href="/employees/accepted-entries/">Accepted Entries</a>
+          {% if employee.employee_id == 'admin' %}
+          <a href="/employees/admin-panel/">Admin Panel</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <a href="/employees/data-entry/" class="btn">+ Submit New Entry</a>
+
+      {% if entries %} {% for entry in entries %}
+      <div class="entry-card">
+        <div class="entry-header">
+          <h3 class="entry-title">{{ entry.title }}</h3>
+          <span class="status {{ entry.status }}"
+            >{{ entry.get_status_display }}</span
+          >
+        </div>
+
+        <div class="entry-meta">
+          Submitted on {{ entry.created_at|date:"F d, Y g:i A" }} {% if
+          entry.updated_at != entry.created_at %} | Updated on {{
+          entry.updated_at|date:"F d, Y g:i A" }} {% endif %}
+        </div>
+
+        <div class="entry-description">
+          <strong>Description:</strong> {{ entry.description }}
+        </div>
+
+        <div class="entry-value">
+          <strong>Data Value:</strong><br />
+          {{ entry.data_value }}
+        </div>
+
+        {% if entry.admin_notes %}
+        <div class="admin-notes">
+          <strong>Admin Notes:</strong><br />
+          {{ entry.admin_notes }}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %} {% else %}
+      <div class="no-entries">
+        <p>You haven't submitted any data entries yet.</p>
+        <a href="/employees/data-entry/" class="btn">Submit Your First Entry</a>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>

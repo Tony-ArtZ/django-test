@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Review Entry</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 40px auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px #0001;
+        padding: 32px;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 16px;
+        margin-bottom: 24px;
+      }
+      h2 {
+        color: #1976d2;
+        margin: 0;
+      }
+      .nav-links {
+        display: flex;
+        gap: 16px;
+      }
+      .nav-links a {
+        color: #1976d2;
+        text-decoration: none;
+        padding: 8px 16px;
+        border: 1px solid #1976d2;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      .nav-links a:hover {
+        background: #1976d2;
+        color: white;
+      }
+      .entry-details {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 24px;
+        border-left: 4px solid #1976d2;
+      }
+      .entry-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 12px;
+      }
+      .entry-meta {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 16px;
+      }
+      .entry-description {
+        margin-bottom: 12px;
+      }
+      .entry-value {
+        background: white;
+        padding: 12px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+      }
+      form {
+        margin-bottom: 16px;
+      }
+      label {
+        display: block;
+        margin-top: 16px;
+        margin-bottom: 4px;
+        font-weight: bold;
+        color: #333;
+      }
+      select,
+      textarea,
+      button {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      textarea {
+        resize: vertical;
+      }
+      .form-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 24px;
+      }
+      .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        font-size: 16px;
+        flex: 1;
+      }
+      .btn-approve {
+        background: #4caf50;
+        color: white;
+      }
+      .btn-approve:hover {
+        background: #45a049;
+      }
+      .btn-cancel {
+        background: #6c757d;
+        color: white;
+      }
+      .btn-cancel:hover {
+        background: #5a6268;
+      }
+      .status-options {
+        display: flex;
+        gap: 16px;
+        margin: 16px 0;
+      }
+      .status-option {
+        flex: 1;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .status-option.accepted {
+        border-color: #4caf50;
+        background: #e8f5e8;
+      }
+      .status-option.rejected {
+        border-color: #f44336;
+        background: #ffebee;
+      }
+      .status-option:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>Review Data Entry</h2>
+        <div class="nav-links">
+          <a href="/employees/admin-panel/">Admin Panel</a>
+          <a href="/employees/details/">Dashboard</a>
+        </div>
+      </div>
+
+      <div class="entry-details">
+        <div class="entry-title">{{ entry.title }}</div>
+        <div class="entry-meta">
+          <strong>Submitted by:</strong> {{ entry.employee.name }} ({{
+          entry.employee.employee_id }}) from {{ entry.employee.department }}<br />
+          <strong>Submitted on:</strong> {{ entry.created_at|date:"F d, Y g:i A"
+          }}<br />
+          <strong>Current Status:</strong> {{ entry.get_status_display }}
+        </div>
+
+        <div class="entry-description">
+          <strong>Description:</strong><br />
+          {{ entry.description }}
+        </div>
+
+        <div class="entry-value">
+          <strong>Data Value:</strong><br />
+          {{ entry.data_value }}
+        </div>
+      </div>
+
+      <form method="post">
+        {% csrf_token %}
+
+        <label for="{{ form.status.id_for_label }}">Decision:</label>
+        {{ form.status }}
+
+        <label for="{{ form.admin_notes.id_for_label }}"
+          >Admin Notes (optional):</label
+        >
+        {{ form.admin_notes }}
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-approve">Update Entry</button>
+          <a href="/employees/admin-panel/" class="btn btn-cancel">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

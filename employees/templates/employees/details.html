@@ -10,7 +10,7 @@
         padding: 0;
       }
       .container {
-        max-width: 400px;
+        max-width: 600px;
         margin: 80px auto;
         background: #fff;
         border-radius: 8px;
@@ -30,6 +30,43 @@
         padding: 10px;
         border-radius: 4px;
       }
+      .nav-section {
+        margin: 24px 0;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border-left: 4px solid #1976d2;
+      }
+      .nav-section h3 {
+        margin-top: 0;
+        color: #333;
+      }
+      .nav-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        margin: 16px 0;
+      }
+      .nav-link {
+        display: block;
+        padding: 12px 16px;
+        background: #1976d2;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        text-align: center;
+        transition: background 0.3s;
+      }
+      .nav-link:hover {
+        background: #125ea2;
+        text-decoration: none;
+      }
+      .admin-link {
+        background: #ff9800;
+      }
+      .admin-link:hover {
+        background: #e68900;
+      }
       a {
         color: #1976d2;
         text-decoration: none;
@@ -41,12 +78,35 @@
   </head>
   <body>
     <div class="container">
-      <h2>Employee Details</h2>
+      <h2>Employee Dashboard</h2>
       <ul>
         <li><strong>ID:</strong> {{ employee.employee_id }}</li>
         <li><strong>Name:</strong> {{ employee.name }}</li>
         <li><strong>Department:</strong> {{ employee.department }}</li>
       </ul>
+
+      <div class="nav-section">
+        <h3>Data Management</h3>
+        <div class="nav-links">
+          <a href="/employees/data-entry/" class="nav-link">Submit New Entry</a>
+          <a href="/employees/my-entries/" class="nav-link">My Entries</a>
+          <a href="/employees/accepted-entries/" class="nav-link"
+            >Accepted Entries</a
+          >
+        </div>
+      </div>
+
+      {% if employee.employee_id == 'admin' %}
+      <div class="nav-section">
+        <h3>Admin Functions</h3>
+        <div class="nav-links">
+          <a href="/employees/admin-panel/" class="nav-link admin-link"
+            >Admin Panel</a
+          >
+        </div>
+      </div>
+      {% endif %}
+
       <a href="/employees/login/">Logout</a>
     </div>
   </body>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin Panel</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 40px auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px #0001;
+        padding: 32px;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 16px;
+        margin-bottom: 24px;
+      }
+      h2 {
+        color: #1976d2;
+        margin: 0;
+      }
+      .nav-links {
+        display: flex;
+        gap: 16px;
+      }
+      .nav-links a {
+        color: #1976d2;
+        text-decoration: none;
+        padding: 8px 16px;
+        border: 1px solid #1976d2;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      .nav-links a:hover {
+        background: #1976d2;
+        color: white;
+      }
+      .entry-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 16px;
+        background: #fafafa;
+      }
+      .entry-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .entry-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin: 0;
+      }
+      .employee-info {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 12px;
+      }
+      .entry-description {
+        margin-bottom: 8px;
+      }
+      .entry-value {
+        background: #f8f9fa;
+        padding: 12px;
+        border-radius: 4px;
+        border-left: 4px solid #1976d2;
+        margin-bottom: 12px;
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 16px;
+      }
+      .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .btn-approve {
+        background: #4caf50;
+        color: white;
+      }
+      .btn-approve:hover {
+        background: #45a049;
+      }
+      .btn-reject {
+        background: #f44336;
+        color: white;
+      }
+      .btn-reject:hover {
+        background: #da190b;
+      }
+      .btn-review {
+        background: #ff9800;
+        color: white;
+      }
+      .btn-review:hover {
+        background: #e68900;
+      }
+      .no-entries {
+        text-align: center;
+        color: #666;
+        padding: 40px;
+      }
+      .msg {
+        padding: 12px;
+        border-radius: 4px;
+        margin: 16px 0;
+      }
+      .msg.success {
+        background: #e8f5e8;
+        color: #2e7d32;
+        border: 1px solid #4caf50;
+      }
+      .msg.error {
+        background: #ffebee;
+        color: #c62828;
+        border: 1px solid #f44336;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>Admin Panel - Pending Approvals</h2>
+        <div class="nav-links">
+          <a href="/employees/details/">Dashboard</a>
+          <a href="/employees/accepted-entries/">Accepted Entries</a>
+          <a href="/employees/data-entry/">New Entry</a>
+        </div>
+      </div>
+
+      {% for message in messages %}
+      <div
+        class="msg {% if message.tags %}{{ message.tags }}{% else %}info{% endif %}"
+      >
+        {{ message }}
+      </div>
+      {% endfor %} {% if entries %} {% for entry in entries %}
+      <div class="entry-card">
+        <div class="entry-header">
+          <h3 class="entry-title">{{ entry.title }}</h3>
+        </div>
+
+        <div class="employee-info">
+          <strong>Submitted by:</strong> {{ entry.employee.name }} ({{
+          entry.employee.employee_id }}) from {{ entry.employee.department }}<br />
+          <strong>Submitted on:</strong> {{ entry.created_at|date:"F d, Y g:i A"
+          }}
+        </div>
+
+        <div class="entry-description">
+          <strong>Description:</strong> {{ entry.description }}
+        </div>
+
+        <div class="entry-value">
+          <strong>Data Value:</strong><br />
+          {{ entry.data_value }}
+        </div>
+
+        <div class="actions">
+          <a href="/employees/approve/{{ entry.id }}/" class="btn btn-review"
+            >Review & Decide</a
+          >
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <div class="no-entries">
+        <p>No pending entries to review.</p>
+        <p>All submissions have been processed!</p>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
