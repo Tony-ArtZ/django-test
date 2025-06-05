@@ -143,25 +143,29 @@
       {% if entries %} {% for entry in entries %}
       <div class="entry-card">
         <div class="entry-header">
-          <h3 class="entry-title">{{ entry.title }}</h3>
+          <h3 class="entry-title">
+            {{ entry.name_of_employee }} ({{ entry.eis_neis_no }})
+          </h3>
           <span class="status {{ entry.status }}"
             >{{ entry.get_status_display }}</span
           >
         </div>
 
         <div class="entry-meta">
+          <strong>Designation:</strong> {{ entry.designation }} |
+          <strong>Department:</strong> {{ entry.department }} |
+          <strong>Area:</strong> {{ entry.area }}<br />
+          <strong>MAC ID:</strong> {{ entry.mac_id_of_system }} |
+          <strong>Mobile:</strong> {{ entry.official_mobile_no }} |
+          <strong>Email:</strong> {{ entry.email_id }}<br />
           Submitted on {{ entry.created_at|date:"F d, Y g:i A" }} {% if
           entry.updated_at != entry.created_at %} | Updated on {{
           entry.updated_at|date:"F d, Y g:i A" }} {% endif %}
         </div>
 
         <div class="entry-description">
-          <strong>Description:</strong> {{ entry.description }}
-        </div>
-
-        <div class="entry-value">
-          <strong>Data Value:</strong><br />
-          {{ entry.data_value }}
+          <strong>Reason for Registration:</strong> {{
+          entry.reason_for_registration }}
         </div>
 
         {% if entry.admin_notes %}

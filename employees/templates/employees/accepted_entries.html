@@ -137,7 +137,6 @@
           {% endif %}
         </div>
       </div>
-
       {% if entries %}
       <div class="stats">
         <div class="stat-item">
@@ -145,32 +144,32 @@
           <div class="stat-label">Accepted Entries</div>
         </div>
       </div>
-
       {% for entry in entries %}
       <div class="entry-card">
         <div class="entry-header">
-          <h3 class="entry-title">{{ entry.title }}</h3>
+          <h3 class="entry-title">
+            {{ entry.name_of_employee }} ({{ entry.eis_neis_no }})
+          </h3>
           <span class="status">{{ entry.get_status_display }}</span>
         </div>
-
         <div class="employee-info">
+          <strong>Designation:</strong> {{ entry.designation }} |
+          <strong>Department:</strong> {{ entry.department }} |
+          <strong>Area:</strong> {{ entry.area }}<br />
+          <strong>MAC ID:</strong> {{ entry.mac_id_of_system }} |
+          <strong>Mobile:</strong> {{ entry.official_mobile_no }} |
+          <strong>Email:</strong> {{ entry.email_id }}<br />
           <strong>Submitted by:</strong> {{ entry.employee.name }} ({{
-          entry.employee.employee_id }}) from {{ entry.employee.department }}<br />
+          entry.employee.employee_id }})<br />
           <strong>Submitted on:</strong> {{ entry.created_at|date:"F d, Y g:i A"
-          }} {% if entry.updated_at != entry.created_at %} |
+          }} {% if entry.updated_at != entry.created_at %}|
           <strong>Approved on:</strong> {{ entry.updated_at|date:"F d, Y g:i A"
-          }} {% endif %}
+          }}{% endif %}
         </div>
-
         <div class="entry-description">
-          <strong>Description:</strong> {{ entry.description }}
+          <strong>Reason for Registration:</strong> {{
+          entry.reason_for_registration }}
         </div>
-
-        <div class="entry-value">
-          <strong>Data Value:</strong><br />
-          {{ entry.data_value }}
-        </div>
-
         {% if entry.admin_notes %}
         <div class="admin-notes">
           <strong>Admin Notes:</strong><br />

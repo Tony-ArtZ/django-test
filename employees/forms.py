@@ -14,10 +14,19 @@ class LoginForm(forms.Form):
 class DataEntryForm(forms.ModelForm):
     class Meta:
         model = DataEntry
-        fields = ['title', 'description', 'data_value']
+        fields = [
+            'name_of_employee',
+            'eis_neis_no',
+            'designation',
+            'department',
+            'area',
+            'mac_id_of_system',
+            'official_mobile_no',
+            'email_id',
+            'reason_for_registration',
+        ]
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 4}),
-            'data_value': forms.Textarea(attrs={'rows': 3}),
+            'reason_for_registration': forms.Textarea(attrs={'rows': 3}),
         }
 
 class ApprovalForm(forms.ModelForm):

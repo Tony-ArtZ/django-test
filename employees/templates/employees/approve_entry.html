@@ -125,31 +125,6 @@
       .btn-cancel:hover {
         background: #5a6268;
       }
-      .status-options {
-        display: flex;
-        gap: 16px;
-        margin: 16px 0;
-      }
-      .status-option {
-        flex: 1;
-        padding: 12px;
-        border: 2px solid #ddd;
-        border-radius: 8px;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s;
-      }
-      .status-option.accepted {
-        border-color: #4caf50;
-        background: #e8f5e8;
-      }
-      .status-option.rejected {
-        border-color: #f44336;
-        background: #ffebee;
-      }
-      .status-option:hover {
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      }
     </style>
   </head>
   <body>
@@ -163,37 +138,37 @@
       </div>
 
       <div class="entry-details">
-        <div class="entry-title">{{ entry.title }}</div>
+        <div class="entry-title">
+          {{ entry.name_of_employee }} ({{ entry.eis_neis_no }})
+        </div>
         <div class="entry-meta">
+          <strong>Designation:</strong> {{ entry.designation }} |
+          <strong>Department:</strong> {{ entry.department }} |
+          <strong>Area:</strong> {{ entry.area }}<br />
+          <strong>MAC ID:</strong> {{ entry.mac_id_of_system }} |
+          <strong>Mobile:</strong> {{ entry.official_mobile_no }} |
+          <strong>Email:</strong> {{ entry.email_id }}<br />
           <strong>Submitted by:</strong> {{ entry.employee.name }} ({{
-          entry.employee.employee_id }}) from {{ entry.employee.department }}<br />
+          entry.employee.employee_id }})<br />
           <strong>Submitted on:</strong> {{ entry.created_at|date:"F d, Y g:i A"
           }}<br />
           <strong>Current Status:</strong> {{ entry.get_status_display }}
         </div>
 
         <div class="entry-description">
-          <strong>Description:</strong><br />
-          {{ entry.description }}
-        </div>
-
-        <div class="entry-value">
-          <strong>Data Value:</strong><br />
-          {{ entry.data_value }}
+          <strong>Reason for Registration:</strong><br />
+          {{ entry.reason_for_registration }}
         </div>
       </div>
 
       <form method="post">
         {% csrf_token %}
-
         <label for="{{ form.status.id_for_label }}">Decision:</label>
         {{ form.status }}
-
         <label for="{{ form.admin_notes.id_for_label }}"
           >Admin Notes (optional):</label
         >
         {{ form.admin_notes }}
-
         <div class="form-actions">
           <button type="submit" class="btn btn-approve">Update Entry</button>
           <a href="/employees/admin-panel/" class="btn btn-cancel">Cancel</a>

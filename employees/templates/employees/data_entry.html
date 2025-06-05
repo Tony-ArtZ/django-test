@@ -121,14 +121,40 @@
       <form method="post">
         {% csrf_token %}
 
-        <label for="{{ form.title.id_for_label }}">Title:</label>
-        {{ form.title }}
+        <label for="{{ form.name_of_employee.id_for_label }}"
+          >Name of Employee:</label
+        >
+        {{ form.name_of_employee }}
 
-        <label for="{{ form.description.id_for_label }}">Description:</label>
-        {{ form.description }}
+        <label for="{{ form.eis_neis_no.id_for_label }}">EIS/NEIS No.:</label>
+        {{ form.eis_neis_no }}
 
-        <label for="{{ form.data_value.id_for_label }}">Data Value:</label>
-        {{ form.data_value }}
+        <label for="{{ form.designation.id_for_label }}">Designation:</label>
+        {{ form.designation }}
+
+        <label for="{{ form.department.id_for_label }}">Department:</label>
+        {{ form.department }}
+
+        <label for="{{ form.area.id_for_label }}">Area (HQ/RI):</label>
+        {{ form.area }}
+
+        <label for="{{ form.mac_id_of_system.id_for_label }}"
+          >MAC ID of System:</label
+        >
+        {{ form.mac_id_of_system }}
+
+        <label for="{{ form.official_mobile_no.id_for_label }}"
+          >Official Mobile No.:</label
+        >
+        {{ form.official_mobile_no }}
+
+        <label for="{{ form.email_id.id_for_label }}">Email ID:</label>
+        {{ form.email_id }}
+
+        <label for="{{ form.reason_for_registration.id_for_label }}"
+          >Reason for Registration:</label
+        >
+        {{ form.reason_for_registration }}
 
         <button type="submit">Submit Entry</button>
       </form>

@@ -10,13 +10,22 @@ class EmployeeAdmin(admin.ModelAdmin):
 
 @admin.register(DataEntry)
 class DataEntryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'employee', 'status', 'created_at', 'updated_at')
-    list_filter = ('status', 'created_at', 'employee__department')
-    search_fields = ('title', 'description', 'employee__name', 'employee__employee_id')
+    list_display = (
+        'name_of_employee', 'eis_neis_no', 'designation', 'department', 'area',
+        'mac_id_of_system', 'official_mobile_no', 'email_id', 'status', 'created_at', 'updated_at'
+    )
+    list_filter = ('status', 'area', 'department', 'created_at')
+    search_fields = (
+        'name_of_employee', 'eis_neis_no', 'designation', 'department',
+        'mac_id_of_system', 'official_mobile_no', 'email_id'
+    )
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
         (None, {
-            'fields': ('employee', 'title', 'description', 'data_value')
+            'fields': (
+                'employee', 'name_of_employee', 'eis_neis_no', 'designation', 'department',
+                'area', 'mac_id_of_system', 'official_mobile_no', 'email_id', 'reason_for_registration'
+            )
         }),
         ('Status', {
             'fields': ('status', 'admin_notes')

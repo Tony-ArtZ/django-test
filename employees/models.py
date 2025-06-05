@@ -16,18 +16,23 @@ class DataEntry(models.Model):
         ('accepted', 'Accepted'),
         ('rejected', 'Not Accepted'),
     ]
-    
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    data_value = models.CharField(max_length=500)
+    name_of_employee = models.CharField(max_length=100)
+    eis_neis_no = models.CharField(max_length=50)
+    designation = models.CharField(max_length=100)
+    department = models.CharField(max_length=100)
+    area = models.CharField(max_length=20, choices=[('HQ', 'HQ'), ('RI', 'RI')])
+    mac_id_of_system = models.CharField(max_length=100)
+    official_mobile_no = models.CharField(max_length=20)
+    email_id = models.EmailField()
+    reason_for_registration = models.TextField()
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     admin_notes = models.TextField(blank=True, null=True)
-    
+
     def __str__(self):
-        return f"{self.title} - {self.employee.name} ({self.status})"
-    
+        return f"{self.name_of_employee} - {self.eis_neis_no} ({self.status})"
+
     class Meta:
         ordering = ['-created_at']
