@@ -159,16 +159,12 @@
           <strong>MAC ID:</strong> {{ entry.mac_id_of_system }} |
           <strong>Mobile:</strong> {{ entry.official_mobile_no }} |
           <strong>Email:</strong> {{ entry.email_id }}<br />
-          <strong>Submitted by:</strong> {{ entry.employee.name }} ({{
-          entry.employee.employee_id }})<br />
-          <strong>Submitted on:</strong> {{ entry.created_at|date:"F d, Y g:i A"
-          }} {% if entry.updated_at != entry.created_at %}|
-          <strong>Approved on:</strong> {{ entry.updated_at|date:"F d, Y g:i A"
-          }}{% endif %}
+          <strong>Submitted by:</strong> {{ entry.employee.name }} ({{ entry.employee.employee_id }})<br />
+          <strong>Submitted on:</strong> {{ entry.created_at|date:"F d, Y g:i A" }} {% if entry.updated_at != entry.created_at %}|
+          <strong>Approved on:</strong> {{ entry.updated_at|date:"F d, Y g:i A" }}{% endif %}
         </div>
         <div class="entry-description">
-          <strong>Reason for Registration:</strong> {{
-          entry.reason_for_registration }}
+          <strong>Reason for Registration:</strong> {{ entry.reason_for_registration }}
         </div>
         {% if entry.admin_notes %}
         <div class="admin-notes">

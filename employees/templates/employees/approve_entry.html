@@ -148,10 +148,8 @@
           <strong>MAC ID:</strong> {{ entry.mac_id_of_system }} |
           <strong>Mobile:</strong> {{ entry.official_mobile_no }} |
           <strong>Email:</strong> {{ entry.email_id }}<br />
-          <strong>Submitted by:</strong> {{ entry.employee.name }} ({{
-          entry.employee.employee_id }})<br />
-          <strong>Submitted on:</strong> {{ entry.created_at|date:"F d, Y g:i A"
-          }}<br />
+          <strong>Submitted by:</strong> {{ entry.employee.name }} ({{entry.employee.employee_id }})<br />
+          <strong>Submitted on:</strong> {{ entry.created_at | date:"F d, Yg:iA" }}<br />
           <strong>Current Status:</strong> {{ entry.get_status_display }}
         </div>
 

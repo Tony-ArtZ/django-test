@@ -55,6 +55,11 @@ def data_entry(request):
             data_entry.save()
             messages.success(request, 'Data entry submitted successfully!')
             return redirect('my_entries')
+        else:
+            # Add form errors to messages for debugging
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f'{field}: {error}')
     else:
         form = DataEntryForm()
     return render(request, 'employees/data_entry.html', {'form': form, 'employee': employee})

@@ -72,13 +72,6 @@
       .entry-description {
         margin-bottom: 8px;
       }
-      .entry-value {
-        background: #f8f9fa;
-        padding: 12px;
-        border-radius: 4px;
-        border-left: 4px solid #1976d2;
-        margin-bottom: 12px;
-      }
       .actions {
         display: flex;
         gap: 12px;
@@ -145,6 +138,7 @@
             {{ entry.name_of_employee }} ({{ entry.eis_neis_no }})
           </h3>
         </div>
+
         <div class="employee-info">
           <strong>Designation:</strong> {{ entry.designation }} |
           <strong>Department:</strong> {{ entry.department }} |
@@ -152,15 +146,14 @@
           <strong>MAC ID:</strong> {{ entry.mac_id_of_system }} |
           <strong>Mobile:</strong> {{ entry.official_mobile_no }} |
           <strong>Email:</strong> {{ entry.email_id }}<br />
-          <strong>Submitted by:</strong> {{ entry.employee.name }} ({{
-          entry.employee.employee_id }})<br />
-          <strong>Submitted on:</strong> {{ entry.created_at|date:"F d, Y g:i A"
-          }}
+          <strong>Submitted by:</strong> {{ entry.employee.name }} ({{ entry.employee.employee_id }})<br />
+          <strong>Submitted on:</strong> {{ entry.created_at|date:"F d, Y g:i A" }}
         </div>
+
         <div class="entry-description">
-          <strong>Reason for Registration:</strong> {{
-          entry.reason_for_registration }}
+          <strong>Reason for Registration:</strong> {{ entry.reason_for_registration }}
         </div>
+
         <div class="actions">
           <a href="/employees/approve/{{ entry.id }}/" class="btn btn-review"
             >Review & Decide</a
